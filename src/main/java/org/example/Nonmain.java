@@ -59,6 +59,31 @@ class Main{
             }
 
         }
+         int totalbill = 0;
+        System.out.println("enter order in the format should be in the format of restaurantid, dishid, quantity");
+        BufferedReader OrderInput = new BufferedReader(new InputStreamReader(System.in));
+        String orderline = OrderInput.readLine();
+//        ArrayList<Dish> orderDish = new ArrayList<>();
+        String[] orderarr = orderline.split(",");
+        Order orders = new Order(orderarr[0],orderarr[1],Integer.parseInt(orderarr[2]));
+        totalbill =  orders.bill(restaurant,totalbill,orderarr[0],orderarr[1],Integer.parseInt(orderarr[2]));
+        System.out.println("Your order with restaurant id: " + orderarr[0] + " and dishid: " + orderarr[1] + " and total bill is " + totalbill);
+        System.out.println("enter 1 for placing the order: ");
+        BufferedReader OrderWallet = Files.newBufferedReader(Paths.get("/Users/subodhthakur/IdeaProjects/shardaswiggy/data/wallet.rtf"));
+        String walletline = OrderWallet.readLine();
+        String[] walletarr = walletline.split(",");
+        Wallet w = new Wallet(walletarr[0],walletarr[1],Integer.parseInt(walletarr[2]));
+        if(w.checkbalance(totalbill,Integer.parseInt(walletarr[2])) == true){
+            System.out.println("Thanks for placing the order " + walletarr[1] + " ");
+        }
+        else{
+            System.out.println("Insufficient balance");
+        }
+
+
+
+
+
 
     }
 }
